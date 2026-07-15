@@ -6,7 +6,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Micr
 .header{background:linear-gradient(135deg,#E67E22,#F39C12);color:#fff;padding:24px 32px;border-radius:12px;margin-bottom:20px;text-align:center}
 .header h1{font-size:22px;font-weight:700}
 .header .sub{font-size:12px;opacity:.85;margin-top:3px}
-.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}
+.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:20px}
 .card{background:#fff;border-radius:10px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .card .l{font-size:11px;color:#636E72;margin-bottom:2px;text-align:center}
 .card .v{font-size:22px;font-weight:700;text-align:center}
@@ -50,6 +50,7 @@ tr:hover td{background:#F8F9FC}
 <div class="card"><div class="l">🏙 城市SABC</div><div class="v">82</div><div class="s">分析191家 | ¥755,549</div></div>
 <div class="card"><div class="l">💰 去重缺口总额</div><div class="v" style="color:#E67E22">¥874,309</div><div class="s">93家独立门店</div></div>
 <div class="card"><div class="l">📦 建议增发￥10,000</div><div class="v" style="color:#1565C0" id="sum_1w">-</div><div class="s">建议增发￥5,000 <span id="sum_5k">-</span>家</div></div>
+<div class="card"><div class="l">💵 总计增补金额</div><div class="v" style="color:#27AE60" id="sum_total">-</div><div class="s">占缺口总额 <span id="sum_pct">-</span></div></div>
 </div>
 
 <div class="nav-tabs">
@@ -135,7 +136,7 @@ function rn93(data){
       +"<td><select class='s-sel' onchange='upd("+i+",\u0022st\u0022,this.value)'>"+so+"</select></td>"
       +"<td><select class='s-sel' onchange='upd("+i+",\u0022pg\u0022,this.value)'>"+po+"</select></td></tr>";
   });
-  document.getElementById("tb93").innerHTML=h;document.getElementById("sum_1w").textContent=s1w+"店";document.getElementById("sum_5k").textContent=s5k;;
+  document.getElementById("tb93").innerHTML=h;document.getElementById("sum_1w").textContent=s1w+"店";var totalSug=s1w*10000+s5k*5000;document.getElementById("sum_1w").textContent=s1w+"店";document.getElementById("sum_5k").textContent=s5k;document.getElementById("sum_total").textContent="¥"+totalSug.toLocaleString();document.getElementById("sum_pct").textContent=Math.round(totalSug/874309*100)+"%";;
 }
 
 function ft93(){
@@ -241,5 +242,6 @@ function expCSV(){
   var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="门店货值标准及补货清单.csv";a.click();
 }
 rn93(cur93);
-rn1(d1.filter(function(x){return x.gp>0;}));n2(d2.filter(function(x){return x.gp>0;}));
+rn1(d1.filter(function(x){return x.gp>0;}));
+n2(d2.filter(function(x){return x.gp>0;}));
 </script></body></html>
